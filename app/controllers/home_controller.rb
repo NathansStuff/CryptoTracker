@@ -17,7 +17,6 @@ class HomeController < ApplicationController
   end
   
   def lookup
+    @symbol = params[:symbol]
   end
 end
-
-# curl -H "X-CMC_PRO_API_KEY: 571099ec-2545-49b6-84dc-432d3a2d3c3b" -H "Accept: application/json" -d "start=1&limit=5000&convert=USD" -G https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest
