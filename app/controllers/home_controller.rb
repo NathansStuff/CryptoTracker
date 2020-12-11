@@ -18,5 +18,17 @@ class HomeController < ApplicationController
   
   def lookup
     @symbol = params[:symbol]
+    @symbol ? @symbol.upcase! : nil
+    @symbol == '' ? @symbol = 'Please enter a currency to lookup' : nil
+
+
+    url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+    headers = {
+        'X-CMC_PRO_API_KEY': '571099ec-2545-49b6-84dc-432d3a2d3c3b',
+    }
+    
+    response = HTTParty.get(url, headers: headers)
+    coins = JSON.parse(response.body)
+    @lookup_coin = coins['data']
   end
 end

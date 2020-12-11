@@ -7,3 +7,11 @@
 
 
 <%= @symbol %>
+<% if @symbol %>
+    <% for coin in @lookup_coin %>
+        <% if @symbol == coin["symbol"] %>
+            <%= coin["name"] %>: USD $<%= coin['quote']['USD']['price'] %><br>
+            rank: <%= coin['cmc_rank'] %><br><br>
+        <% end %>
+    <% end %>
+<% end %>
