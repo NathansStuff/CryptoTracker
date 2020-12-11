@@ -6,12 +6,24 @@ class CryptosController < ApplicationController
   # GET /cryptos
   # GET /cryptos.json
   def index
+    @portfolio_profit = 0
+    # Fetches current user cryptos
     @cryptos = []
     cryptos = Crypto.includes(:user).each do |crypto|
       if crypto.user_id == current_user.id
         @cryptos << crypto
       end
     end
+
+    #Connects to API
+    url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+    headers = {
+        'X-CMC_PRO_API_KEY': '571099ec-2545-49b6-84dc-432d3a2d3c3b',
+    }
+    
+    response = HTTParty.get(url, headers: headers)
+    coins = JSON.parse(response.body)
+    @crypto_coins = coins['data']
   end
 
   # GET /cryptos/1
