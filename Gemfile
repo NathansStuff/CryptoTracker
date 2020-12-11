@@ -5,6 +5,8 @@ gem 'httparty'
 
 gem 'devise'
 
+gem 'cancancan'
+
 ruby '2.7.1'
 gem 'bootstrap', '~> 4.5', '>= 4.5.3'
 gem 'jquery-rails'
