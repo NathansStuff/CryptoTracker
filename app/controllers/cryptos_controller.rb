@@ -1,6 +1,7 @@
 class CryptosController < ApplicationController
   before_action :set_crypto, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
   # GET /cryptos
   # GET /cryptos.json
@@ -25,14 +26,13 @@ class CryptosController < ApplicationController
 
   # GET /cryptos/1/edit
   def edit
-    authorize! :owner, @crypto
+    # authorize! :owner, @crypto
   end
 
   # POST /cryptos
   # POST /cryptos.json
   def create
     @crypto = current_user.cryptos.build(crypto_params)
-    # @crypto.user_id == current_user.id
 
     respond_to do |format|
       if @crypto.save
@@ -48,7 +48,6 @@ class CryptosController < ApplicationController
   # PATCH/PUT /cryptos/1
   # PATCH/PUT /cryptos/1.json
   def update
-    authorize! :owner, @crypto
     respond_to do |format|
       if @crypto.update(crypto_params)
         format.html { redirect_to @crypto, notice: 'Crypto was successfully updated.' }
@@ -63,7 +62,6 @@ class CryptosController < ApplicationController
   # DELETE /cryptos/1
   # DELETE /cryptos/1.json
   def destroy
-    authorize! :owner, @crypto
     @crypto.destroy
     respond_to do |format|
       format.html { redirect_to cryptos_url, notice: 'Crypto was successfully destroyed.' }
@@ -80,5 +78,10 @@ class CryptosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def crypto_params
       params.require(:crypto).permit(:symbol, :cost_per, :amount_owned)
+    end
+
+    def correct_user
+      @correct_user = current_user.cryptos.find_by(id: params[:id])
+      redirect_to cryptos_path, notice: "This crypto doesn't belong to you!"
     end
 end
