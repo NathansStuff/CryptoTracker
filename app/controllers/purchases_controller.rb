@@ -1,10 +1,16 @@
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /purchases
   # GET /purchases.json
   def index
-    @purchases = Purchase.all
+    @purchases = []
+    for purchase in Purchase.all
+      if purchase.user_id == current_user.id
+        @purchases << purchase
+      end
+    end
   end
 
   # GET /purchases/1
@@ -14,7 +20,7 @@ class PurchasesController < ApplicationController
 
   # GET /purchases/new
   def new
-    @purchase = Purchase.new
+    @purchase = current_user.purchases.build
   end
 
   # GET /purchases/1/edit
@@ -24,7 +30,7 @@ class PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
-    @purchase = Purchase.new(purchase_params)
+    @purchase = current_user.purchases.build(purchase_params)
 
     respond_to do |format|
       if @purchase.save
@@ -69,6 +75,6 @@ class PurchasesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def purchase_params
-      params.require(:purchase).permit(:user_id, :symbol, :cost_per, :amount, :fee, :total_cost, :description)
+      params.require(:purchase).permit(:symbol, :cost_per, :amount, :fee, :total_cost, :description)
     end
 end
