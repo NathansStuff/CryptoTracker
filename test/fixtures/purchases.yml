@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  symbol: MyString
+  cost_per: 9.99
+  amount: 9.99
+  fee: 9.99
+  total_cost: 9.99
+  description: MyString
+
+two:
+  user_id: 1
+  symbol: MyString
+  cost_per: 9.99
+  amount: 9.99
+  fee: 9.99
+  total_cost: 9.99
+  description: MyString

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :purchases
   resources :cryptos
   devise_for :users
   root 'home#index'

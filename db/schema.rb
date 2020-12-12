@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_031646) do
+ActiveRecord::Schema.define(version: 2020_12_12_214523) do
 
   create_table "cryptos", force: :cascade do |t|
     t.string "symbol"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 2020_12_11_031646) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_cryptos_on_user_id"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "symbol"
+    t.decimal "cost_per"
+    t.decimal "amount"
+    t.decimal "fee"
+    t.decimal "total_cost"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
