@@ -8,12 +8,13 @@ class CryptosController < ApplicationController
   def index
     @portfolio_profit = 0
     # Fetches current user cryptos
-    @cryptos = []
-    cryptos = Crypto.includes(:user).each do |crypto|
-      if crypto.user_id == current_user.id
-        @cryptos << crypto
-      end
-    end
+    # @cryptos = []
+    @cryptos = Crypto.where(user_id: current_user.id)
+    # cryptos = Crypto.each do |crypto|
+    #   if crypto.user_id == current_user.id
+    #     @cryptos << crypto
+    #   end
+    # end
 
     #Connects to API
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'

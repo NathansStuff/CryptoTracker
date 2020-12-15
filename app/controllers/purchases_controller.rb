@@ -30,7 +30,13 @@ class PurchasesController < ApplicationController
   # POST /purchases
   # POST /purchases.json
   def create
-    @purchase = current_user.purchases.build(purchase_params)
+    @purchase = Purchase.new(purchase_params)
+    @purchase.user = current_user
+    
+    crypto = Crypto.where(symbol: 'BTC', user_id: current_user.id)
+
+    @purchase.crypto_id = crypto[0].id
+
 
     respond_to do |format|
       if @purchase.save

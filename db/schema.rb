@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_12_214523) do
+ActiveRecord::Schema.define(version: 2020_12_14_022657) do
 
   create_table "cryptos", force: :cascade do |t|
     t.string "symbol"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2020_12_12_214523) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "crypto_id", null: false
+    t.index ["crypto_id"], name: "index_purchases_on_crypto_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
@@ -47,4 +49,5 @@ ActiveRecord::Schema.define(version: 2020_12_12_214523) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "purchases", "cryptos"
 end
