@@ -2,41 +2,39 @@ class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-  # GET /purchases
-  # GET /purchases.json
   def index
-    @purchases = []
-    for purchase in Purchase.all
-      if purchase.user_id == current_user.id
-        @purchases << purchase
-      end
-    end
+    @purchases = Purchase.where(user_id: current_user.id)
   end
 
-  # GET /purchases/1
-  # GET /purchases/1.json
   def show
   end
 
-  # GET /purchases/new
   def new
     @purchase = current_user.purchases.build
   end
 
-  # GET /purchases/1/edit
   def edit
   end
 
-  # POST /purchases
-  # POST /purchases.json
   def create
     @purchase = Purchase.new(purchase_params)
     @purchase.user = current_user
-    
-    crypto = Crypto.where(symbol: 'BTC', user_id: current_user.id)
+    @purchase.symbol.upcase!
 
-    @purchase.crypto_id = crypto[0].id
+    # Determine which crypto the currency belongs to
+    cryptos = Crypto.where(user_id: current_user.id)
+    for crypto in cryptos
+      if crypto.symbol == @purchase.symbol
+        @purchase.crypto_id = crypto.id
+      end
+    end
 
+    # If there is no crypto it belongs to, it creates a new one
+    if !@purchase.crypto_id.present?
+      @crypto = current_user.cryptos.build(symbol: @purchase.symbol, amount_owned: @purchase.amount, cost_per: @purchase.total_cost)
+      @crypto.save!
+      @purchase.crypto_id = @crypto.id
+    end
 
     respond_to do |format|
       if @purchase.save
@@ -49,8 +47,6 @@ class PurchasesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /purchases/1
-  # PATCH/PUT /purchases/1.json
   def update
     respond_to do |format|
       if @purchase.update(purchase_params)
@@ -63,8 +59,6 @@ class PurchasesController < ApplicationController
     end
   end
 
-  # DELETE /purchases/1
-  # DELETE /purchases/1.json
   def destroy
     @purchase.destroy
     respond_to do |format|
@@ -74,12 +68,10 @@ class PurchasesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_purchase
       @purchase = Purchase.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def purchase_params
       params.require(:purchase).permit(:symbol, :cost_per, :amount, :fee, :total_cost, :description)
     end

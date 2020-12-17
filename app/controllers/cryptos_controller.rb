@@ -1,20 +1,10 @@
 class CryptosController < ApplicationController
   before_action :set_crypto, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :correct_user, only: [:show, :edit, :update, :destroy]
 
-  # GET /cryptos
-  # GET /cryptos.json
   def index
     @portfolio_profit = 0
-    # Fetches current user cryptos
-    # @cryptos = []
     @cryptos = Crypto.where(user_id: current_user.id)
-    # cryptos = Crypto.each do |crypto|
-    #   if crypto.user_id == current_user.id
-    #     @cryptos << crypto
-    #   end
-    # end
 
     #Connects to API
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
@@ -27,23 +17,16 @@ class CryptosController < ApplicationController
     @crypto_coins = coins['data']
   end
 
-  # GET /cryptos/1
-  # GET /cryptos/1.json
   def show
   end
 
-  # GET /cryptos/new
   def new
     @crypto = current_user.cryptos.build
   end
 
-  # GET /cryptos/1/edit
   def edit
-    # authorize! :owner, @crypto
   end
 
-  # POST /cryptos
-  # POST /cryptos.json
   def create
     @crypto = current_user.cryptos.build(crypto_params)
 
@@ -91,10 +74,5 @@ class CryptosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def crypto_params
       params.require(:crypto).permit(:symbol, :cost_per, :amount_owned)
-    end
-
-    def correct_user
-      @correct_user = current_user.cryptos.find_by(id: params[:id])
-      redirect_to cryptos_path, notice: "This crypto doesn't belong to you!"
     end
 end
