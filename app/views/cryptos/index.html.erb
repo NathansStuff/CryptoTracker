@@ -27,11 +27,11 @@
             <%# Current Value %>
             <td><%= number_to_currency(crypto_coin['quote']['USD']['price']) %></td>
             <%# 1 Hr Change %>
-            <td><%= (crypto_coin['quote']['USD']['percent_change_1h']).round / 100.0 %>%</td>
+            <td><%= (crypto_coin['quote']['USD']['percent_change_1h']).round %>%</td>
             <%# 24 Hr Change %>
-            <td><%= (crypto_coin['quote']['USD']['percent_change_24h']).round / 100.0 %>%</td>
+            <td><%= (crypto_coin['quote']['USD']['percent_change_24h']).round  %>%</td>
             <%# 7 Day Change %>
-            <td><%= (crypto_coin['quote']['USD']['percent_change_7d']).round / 100.0 %>%</td>
+            <td><%= (crypto_coin['quote']['USD']['percent_change_7d']).round  %>%</td>
             <%# Total Value %>
             <td><%= number_to_currency(crypto_coin['quote']['USD']['price'].to_d * crypto.amount_owned) %>
             <%# Total Paid %>

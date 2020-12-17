@@ -18,6 +18,8 @@ class CryptosController < ApplicationController
   end
 
   def show
+    @purchases = Purchase.where(user_id: current_user.id,crypto_id: params[:id])
+    p @purchases
   end
 
   def new
