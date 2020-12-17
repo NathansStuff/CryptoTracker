@@ -20,7 +20,7 @@ class PurchasesController < ApplicationController
     @purchase = Purchase.new(purchase_params)
     @purchase.user = current_user
     @purchase.symbol.upcase!
-
+    # @crypto = ''
     # Determine which crypto the currency belongs to
     cryptos = Crypto.where(user_id: current_user.id)
     for crypto in cryptos
@@ -31,13 +31,26 @@ class PurchasesController < ApplicationController
 
     # If there is no crypto it belongs to, it creates a new one
     if !@purchase.crypto_id.present?
-      @crypto = current_user.cryptos.build(symbol: @purchase.symbol, amount_owned: @purchase.amount, cost_per: @purchase.total_cost)
+      @crypto = current_user.cryptos.build(symbol: @purchase.symbol, amount_owned: 0, cost_per: 0)
       @crypto.save!
       @purchase.crypto_id = @crypto.id
     end
 
     respond_to do |format|
       if @purchase.save
+        update_crypto(@purchase)
+
+        # @crypto = Crypto.where(user_id: current_user.id, id: @purchase.crypto_id)
+        # p '****************'
+        # p @crypto
+        # p '//////////'
+        # p @crypto.amount_owned
+
+        # Update the crypto variables
+        # @crypto.amount_owned += @purchase.amount
+        # @crypto.cost_per += ((@purchase.total_cost) / (@purchase.amount))
+
+
         format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         format.json { render :show, status: :created, location: @purchase }
       else
@@ -75,4 +88,19 @@ class PurchasesController < ApplicationController
     def purchase_params
       params.require(:purchase).permit(:symbol, :cost_per, :amount, :fee, :total_cost, :description)
     end
+
+    def update_crypto(purchase)
+      cryptos = Crypto.where(user_id: current_user.id)
+      for crypto in cryptos
+        if crypto.symbol == @purchase.symbol
+          @crypto = crypto
+        end
+      end
+      @crypto.amount_owned += purchase.amount
+      @crypto.cost_per += ((purchase.total_cost)/(purchase.amount))
+      @crypto.save!
+    end
 end
+
+
+# How to update it???!!
