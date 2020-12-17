@@ -96,8 +96,17 @@ class PurchasesController < ApplicationController
           @crypto = crypto
         end
       end
-      @crypto.amount_owned += purchase.amount
-      @crypto.cost_per += ((purchase.total_cost)/(purchase.amount))
+
+      if purchase.description == 'Buy'
+        @crypto.amount_owned += purchase.amount
+        @crypto.cost_per += ((purchase.total_cost)/(purchase.amount))
+      else
+        @crypto.amount_owned -= purchase.amount
+
+
+        # The math doesn't work properly for selling
+        @crypto.cost_per -= ((purchase.total_cost)/(purchase.amount))
+      end
       @crypto.save!
     end
 end

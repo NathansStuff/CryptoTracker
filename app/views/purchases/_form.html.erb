@@ -38,8 +38,9 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_field :description %>
+    <%= form.select :description, ["Buy", 'Sell']%>
   </div>
+
 
   <div class="actions">
     <%= form.submit %>
