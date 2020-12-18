@@ -12,6 +12,20 @@
  *
 
  */
- 
-// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import 'purchases';
+
+:root {
+    --c1: #031A6B;
+    --c2: #033860;
+    --c3: #087CA7;
+    --c4: #004385;
+    --c5: #05b2dc;
+}
+
+*,
+body {
+    margin: 0;
+}
+
+ // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";

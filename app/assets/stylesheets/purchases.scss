@@ -1,3 +1,55 @@
-// Place all the styles related to the purchases controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.purchase-container {
+    width: 100vw;
+    display: flex;
+    padding: 5 15px;
+    overflow-x: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--c3);
+}
+
+.purchase-card {
+    background-color: var(--c2);
+    min-width: 210px;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 20px;
+    border-radius: 10px;
+    margin: 10px;
+    color: #fff;
+    box-shadow: -.2rem -.2rem -.2rem #000000;
+}
+
+.purchase-card:hover {
+    cursor: pointer;
+}
+
+.purchase-card-description {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.purchase-card-description p {
+    font-size: 17px;
+}
+
+.purchase-card-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.purchase-img {
+    width: 40px;
+    text-align: center;
+}
+
+.purchase-amount p {
+    font-size: 25px;
+}
