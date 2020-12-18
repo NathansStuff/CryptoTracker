@@ -94,18 +94,31 @@ class PurchasesController < ApplicationController
       for crypto in cryptos
         if crypto.symbol == @purchase.symbol
           @crypto = crypto
+          @crypto_total_cost = @crypto.cost_per * @crypto.amount_owned
         end
       end
 
       if purchase.description == 'Buy'
+        @crypto_total_cost += @purchase.total_cost
         @crypto.amount_owned += purchase.amount
-        @crypto.cost_per += ((purchase.total_cost)/(purchase.amount))
+        @crypto_new_total_cost = @crypto_total_cost / @crypto.amount_owned
+        @crypto.cost_per = @crypto_new_total_cost
+        @crypto.save!
       else
+        @crypto_total_cost -= @purchase.total_cost
         @crypto.amount_owned -= purchase.amount
+        @crypto_new_total_cost = @crypto_total_cost / @crypto.amount_owned
+        @crypto.cost_per = @crypto_new_total_cost
+        @crypto.save!
 
+
+
+
+        # @crypto.amount_owned -= purchase.amount
+      
 
         # The math doesn't work properly for selling
-        @crypto.cost_per -= ((purchase.total_cost)/(purchase.amount))
+        # @crypto.cost_per -= ((purchase.total_cost)/(purchase.amount))
       end
       @crypto.save!
     end
