@@ -1,31 +1,37 @@
 .purchase-container {
-    width: 100vw;
-    display: flex;
+    width: 100%;
+    min-height: 90vh;
     padding: 5 15px;
     overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     background-color: var(--c3);
 }
 
 .purchase-card {
     background-color: var(--c2);
     min-width: 210px;
+    max-height: 160px;
     margin: 0 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: 20px 20px;
+    padding: 20px 20px 0 20px;
     border-radius: 10px;
     margin: 10px;
     color: #fff;
-    box-shadow: -.2rem -.2rem -.2rem #000000;
+    box-shadow: .2rem .2rem .2rem var(--c4);
+    transition: all 0.5s;
 }
 
 .purchase-card:hover {
     cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: .3rem .3rem .3rem var(--c4);
 }
 
 .purchase-card-description {
@@ -52,4 +58,47 @@
 
 .purchase-amount p {
     font-size: 25px;
+}
+
+.purchase-overview {
+    width: 100vw;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.purchase-purchases {
+    display: flex;
+    // flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-self: center;
+}
+
+
+.purchase-btn {
+    background-color: var(--c4);
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.1);
+    padding: 13px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+    margin-left: 10px;
+    // max-height: 55px;
+}
+
+.purchase-btn:active {
+    transform: scale(.95);
+}
+
+.purchase-btn:focus {
+    outline: none;
+}
+
+.purchase-btn:hover {
+    text-decoration: none;
+    color: #fff;
 }

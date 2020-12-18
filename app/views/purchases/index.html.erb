@@ -1,35 +1,37 @@
-<h1>Purchases</h1>
-
-<%= link_to 'New Purchase', new_purchase_path %>
-
-
 <div class='purchase-container'>
-  <% for purchase in @purchases %>
-    <div class='purchase-card'>
-      <div class='purchase-card-top'>
-      <h3><% if purchase.description == 'Buy' %>
-            Bought       
-          <% else %>
-            Sold
-          <% end %>
-      </h3>
-      <%= image_tag("color/#{purchase.symbol.downcase}.png", :class => 'purchase-img')%>
+  <div class='purchase-overview'>
+    <h1>Transactions</h1>
+    <%= link_to 'New Transaction', new_purchase_path, class: 'purchase-btn' %>
+  </div>
+
+  <div class='purchase-purchases'>
+    <% for purchase in @purchases %>
+      <div class='purchase-card'>
+        <div class='purchase-card-top'>
+        <h3><% if purchase.description == 'Buy' %>
+              Bought       
+            <% else %>
+              Sold
+            <% end %>
+        </h3>
+        <%= image_tag("color/#{purchase.symbol.downcase}.png", :class => 'purchase-img')%>
+        </div>
+
+        <div class='purchase-amount'>
+          <p><%= purchase.description == 'Buy' ? '+' : '-' %>
+          <%= purchase.amount %></p>
+        </div>
+
+        <div class='purchase-card-description'>
+          <div><p>$<%= purchase.total_cost %></p></div>
+          <div><small><%=  purchase.created_at.strftime("%d-%b")%></small></div>
+        </div>
       </div>
 
-      <div class='purchase-amount'>
-        <p><%= purchase.description == 'Buy' ? '+' : '-' %>
-        <%= purchase.amount %></p>
-      </div>
 
-      <div class='purchase-card-description'>
-        <div><p>$<%= purchase.total_cost %></p></div>
-        <div><small><%=  purchase.created_at.strftime("%d-%b")%></small></div>
-      </div>
-    </div>
-
-
-    <a href=><span></span></a>
-  <% end %>
+      <a href=><span></span></a>
+    <% end %>
+  </div>
 </div>
 
 
