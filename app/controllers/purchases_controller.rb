@@ -4,6 +4,8 @@ class PurchasesController < ApplicationController
 
   def index
     @purchases = Purchase.where(user_id: current_user.id)
+
+
   end
 
   def show

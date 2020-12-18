@@ -32,3 +32,11 @@
 <br>
 
 <%= link_to 'New Purchase', new_purchase_path %>
+
+
+
+<% for purchase in @purchases %>
+  <div class='purchase-card'>
+    <%= image_tag "color/#{purchase.symbol.downcase}.png" %>
+  </div>
+<% end %>
