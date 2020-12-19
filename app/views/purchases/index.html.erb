@@ -14,7 +14,9 @@
               Sold
             <% end %>
         </h3>
-        <%= image_tag("color/#{purchase.symbol.downcase}.png", :class => 'purchase-img')%>
+        <% if File.exist?("color/#{purchase.symbol.downcase}.png") %>
+          <%= image_tag("color/#{purchase.symbol.downcase}.png", :class => 'purchase-img')%>
+        <% end %>
         </div>
 
         <div class='purchase-amount'>

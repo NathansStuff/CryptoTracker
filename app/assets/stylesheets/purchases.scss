@@ -1,3 +1,5 @@
+// Index
+
 .purchase-container {
     width: 100%;
     min-height: 90vh;
@@ -5,7 +7,7 @@
     overflow-x: hidden;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     background-color: var(--c3);
 }
@@ -102,3 +104,90 @@
     text-decoration: none;
     color: #fff;
 }
+
+// End Index
+
+// Form
+
+.purchase-form {
+    width: 100%;
+    background-color: var(--c3);
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Muli, sans-serif;
+    font-size: 20px;
+}
+
+.purchase-form-form {
+    width: 90%;
+    padding: 0 auto;
+}
+
+.purchase-form-form h2 {
+    text-align: center;
+}
+
+.purchase-form-container {
+    background-color: var(--c2);
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    max-width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content : center;
+    margin: 40px 0;
+}
+
+.purchase-form-container label {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.purchase-form-container input {
+    width: 100%;
+    margin: 10px 0;
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px #fff solid;
+    color: #fff;
+}
+
+.purchase-form-container input:focus {
+    outline: none;
+}
+
+#purchase-form-btn {
+    margin: 25px 0 10px 0;
+    color: #fff;
+    background-color: var(--c5);
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    outline: var(--c5);
+}
+
+
+.purchase-form-btn:active {
+    transform: scale(0.97);
+}
+
+.purchase-form-radio-inner {
+    display: flex;
+    justify-content: space-between;
+}
+
+.purchase-form-radio-option {
+    display: flex;
+    max-width: 33%;
+    // flex-direction: c
+}
+
+.purchase-form-radio-option label {
+    margin-right: 10px;
+}
+
+// End Form

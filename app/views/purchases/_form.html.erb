@@ -1,48 +1,73 @@
-<%= form_with(model: purchase, local: true) do |form| %>
-  <% if purchase.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
+<div class='purchase-form'>
+  <div class='purchase-form-container'>
+    <div class=purchase-form-form>
+      
+     <h2>New Transaction</h2>
+      
+      <%= form_with(model: purchase, local: true) do |form| %>
+        <% if purchase.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(purchase.errors.count, "error") %> prohibited this purchase from being saved:</h2>
 
-      <ul>
-        <% purchase.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+            <ul>
+              <% purchase.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+
+
+        <div class='purchase-form-radio'>
+
+
+          <div class='purchase-form-radio-inner'>
+            <div class='purchase-form-radio-option'>
+            <%= form.label :description, 'Buy', :value => 'Buy' %>
+            <%= form.radio_button :description, 'Buy' %>
+            </div>
+            <div class='purchase-form-radio-option'>
+            <%= form.label :description, 'Sell', :value => 'Sell' %>
+            <%= form.radio_button :description, 'Sell' %>
+            </div>
+            <div class='purchase-form-radio-option'>
+            <%= form.label :description, 'Move', :value => 'Move' %>
+            <%= form.radio_button :description, 'Move' %>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="field">
+          <%= form.label :symbol %>
+          <%= form.text_field :symbol, placeholder: 'Symbol eg, BTC, XRP..' %>
+        </div>
+
+        <div class="field">
+          <label>Cryptocurrency price</label>
+          <%= form.text_field :cost_per, id: 'purchasePrice', placeholder: 'Price at time of transaction'%>
+        </div>
+
+        <div class="field">
+          <label>Amount</label>
+          <%= form.text_field :amount, id: 'purchaseAmount', placeholder: 'Amount of crypto involved' %>
+        </div>
+
+        <div class="field">
+          <label>Fee Charged</label>
+          <%= form.text_field :fee, id: 'purchaseFee', placeholder: 'Transaction fee' %>
+        </div>
+
+        <div class="field">
+          <label>Total Value</label>
+          <%= form.text_field :total_cost, id: 'purchaseTotal', placeholder: 'Total value' %>
+        </div>
+
+
+        <div class="actions">
+          <%= form.submit 'Create Transaction', class: 'purchase-form-btn', id: 'purchase-form-btn' %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :symbol %>
-    <%= form.text_field :symbol %>
   </div>
-
-  <div class="field">
-    <%= form.label :cost_per %>
-    <%= form.text_field :cost_per %>
-  </div>
-
-  <div class="field">
-    <%= form.label :amount %>
-    <%= form.text_field :amount %>
-  </div>
-
-  <div class="field">
-    <%= form.label :fee %>
-    <%= form.text_field :fee %>
-  </div>
-
-  <div class="field">
-    <%= form.label :total_cost %>
-    <%= form.text_field :total_cost %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.select :description, ["Buy", 'Sell']%>
-  </div>
-
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
