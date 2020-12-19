@@ -17,8 +17,8 @@
                 Moved
               <% end %>
           </h3>
-          <% file = File.join(Rails.root, "app", "assets", "images") %>
-          <% if File.exist?("#{file}/color/#{purchase.symbol.downcase}.png") %>
+
+          <% if File.exist?("#{@file}/color/#{purchase.symbol.downcase}.png") %>
             <%= image_tag("color/#{purchase.symbol.downcase}.png", :class => 'purchase-img')%>
           <% end %>
           </div>

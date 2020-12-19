@@ -1,6 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :set_purchase, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_file, only: [:index, :show, :update]
 
   def index
     @purchases = Purchase.where(user_id: current_user.id)
@@ -123,6 +124,10 @@ class PurchasesController < ApplicationController
         # @crypto.cost_per -= ((purchase.total_cost)/(purchase.amount))
       end
       @crypto.save!
+    end
+
+    def set_file
+      @file = File.join(Rails.root, "app", "assets", "images")
     end
 end
 

@@ -200,4 +200,71 @@
     margin-right: 10px;
 }
 
-// End Form
+// End Purchases Form
+
+// Purchases Show
+
+.purchases-show {
+    width: 100%;
+    background-color: var(--c3);
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Muli, sans-serif;
+    font-size: 20px;
+}
+
+.purchases-show-container {
+    background-color: var(--c2);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 40px;
+    max-width: 90vw;
+    min-width: 300px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.purchases-show-header {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.purchases-show-date {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.purchases-show-btn-container {
+    display: flex;
+    // justify-content: space-around;
+    align-items: center;
+}
+
+.purchase-show-btn {
+    background-color: var(--c4);
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 15px;
+    color: #fff;
+}
+
+.purchase-show-btn:nth-child(3) {
+    margin-right: 0;
+    background-color: var(--c1);
+}
+
+.purchase-show-btn:hover {
+    text-decoration: none;
+    background-color: var(--c1);
+}
+
+.purchase-show-btn:active {
+    transform: scale(.97);
+}
+
+// End Purchases Show

@@ -1,39 +1,69 @@
-<p id="notice"><%= notice %></p>
+<div class='purchases-show'>
+  <div class='purchases-show-container'>
 
-<p>
-  <strong>User:</strong>
-  <%= @purchase.user_id %>
-</p>
 
-<p>
-  <strong>Symbol:</strong>
-  <%= @purchase.symbol %>
-</p>
 
-<p>
-  <strong>Cost per:</strong>
-  <%= @purchase.cost_per %>
-</p>
 
-<p>
-  <strong>Amount:</strong>
-  <%= @purchase.amount %>
-</p>
+    <div class='purchases-show-header'>
+    <strong>
+      <% if @purchase.description == 'Buy' %>
+        Bought
+      <% elsif @purchase.description == 'Sell' %>
+        Sold
+      <% else %>
+        Moved
+      <% end %>
+      <% if File.exist?("#{@file}/color/#{@purchase.symbol.downcase}.png") %>
+        <%= image_tag("color/#{@purchase.symbol.downcase}.png", :class => 'purchase-img')%>
+      <% end %>
+    </strong>
+    </div>
 
-<p>
-  <strong>Fee:</strong>
-  <%= @purchase.fee %>
-</p>
+    <div class='purchases-show-date'>
+      <small><%= @purchase.created_at.strftime("%d-%b-%Y")%></small>
+    </div>
 
-<p>
-  <strong>Total cost:</strong>
-  <%= @purchase.total_cost %>
-</p>
+    <div>
+    <p>
+      <strong>Crypto Symbol:</strong>
+      <%= @purchase.symbol %>
+    </p>
+    </div>
+    
+    <div>
+    <p>
+      <strong>Cost per:</strong>
+      $<%= @purchase.cost_per %>
+    </p>
+    </div>
+    
+    <div>
+    <p>
+      <strong>Amount:</strong>
+      <%= @purchase.amount %>
+    </p>
+    </div>
+    
+    <div>
+    <p>
+      <strong>Fee:</strong>
+      $<%= @purchase.fee %>
+    </p>
+    </div>
+    
+    <div>
+    <p>
+      <strong>Total Cost:</strong>
+      $<%= @purchase.total_cost %>
+    </p>
+    </div>
+    
+    <div class='purchases-show-btn-container'>
+      <%= link_to 'Back', purchases_path, class: 'purchase-show-btn btn-back' %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @purchase.description %>
-</p>
-
-<%= link_to 'Edit', edit_purchase_path(@purchase) %> |
-<%= link_to 'Back', purchases_path %>
+      <%= link_to 'Edit', edit_purchase_path(@purchase), class: 'purchase-show-btn' %> 
+      
+      <%= link_to 'Delete', @purchase, method: :delete, data: {confirm: 'Are you sure?'}, class: 'purchase-show-btn' %>
+    </div>
+  </div>
+</div>
