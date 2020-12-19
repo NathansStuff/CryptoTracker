@@ -6,32 +6,40 @@
 
   <div class='purchase-purchases'>
     <% for purchase in @purchases %>
-      <div class='purchase-card'>
-        <div class='purchase-card-top'>
-        <h3><% if purchase.description == 'Buy' %>
-              Bought       
-            <% else %>
-              Sold
-            <% end %>
-        </h3>
-        <% if File.exist?("color/#{purchase.symbol.downcase}.png") %>
-          <%= image_tag("color/#{purchase.symbol.downcase}.png", :class => 'purchase-img')%>
-        <% end %>
-        </div>
+      <div>
+        <div class='purchase-card'>
+          <div class='purchase-card-top'>
+          <h3><% if purchase.description == 'Buy' %>
+                Bought       
+              <% elsif purchase.description == 'Sell'%>
+                Sold
+              <% else %>
+                Moved
+              <% end %>
+          </h3>
+          <% file = File.join(Rails.root, "app", "assets", "images") %>
+          <% if File.exist?("#{file}/color/#{purchase.symbol.downcase}.png") %>
+            <%= image_tag("color/#{purchase.symbol.downcase}.png", :class => 'purchase-img')%>
+          <% end %>
+          </div>
 
-        <div class='purchase-amount'>
-          <p><%= purchase.description == 'Buy' ? '+' : '-' %>
-          <%= purchase.amount %></p>
-        </div>
+          <div class='purchase-amount'>
+            <p><%= purchase.description == 'Buy' ? '+' : '-' %>
+            <%= purchase.amount %></p>
+          </div>
 
-        <div class='purchase-card-description'>
-          <div><p>$<%= purchase.total_cost %></p></div>
-          <div><small><%=  purchase.created_at.strftime("%d-%b")%></small></div>
+          <div class='purchase-card-description'>
+            <div><p>$<%= purchase.total_cost %></p></div>
+            <div><small><%=  purchase.created_at.strftime("%d-%b")%></small></div>
+          </div>
+
+          <a href="<%= purchase_path(purchase) %>">
+          <span></span></a>  
         </div>
       </div>
+      
 
-
-      <a href=><span></span></a>
+      
     <% end %>
   </div>
 </div>
