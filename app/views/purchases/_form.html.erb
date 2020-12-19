@@ -2,7 +2,11 @@
   <div class='purchase-form-container'>
     <div class=purchase-form-form>
       
-     <h2>New Transaction</h2>
+      <% if purchase.new_record? %>
+        <h2>New Transaction</h2>
+      <% else %>
+        <h2>Edit Transaction</h2>
+      <% end %>
       
       <%= form_with(model: purchase, local: true) do |form| %>
         <% if purchase.errors.any? %>
@@ -65,7 +69,13 @@
 
 
         <div class="actions">
-          <%= form.submit 'Create Transaction', class: 'purchase-form-btn', id: 'purchase-form-btn' %>
+          <% if purchase.new_record? %>
+            <%= form.submit 'Create Transaction', class: 'purchase-form-btn', id: 'purchase-form-btn' %>
+            <p>Don't wait to create a transaction? <a href="<%= purchases_path %>">Go Back</a></p>
+          <% else %>
+            <%= form.submit 'Edit Transaction', class: 'purchase-form-btn', id: 'purchase-form-btn' %>
+            <p>Don't wait to edit this transaction? <a href="<%= purchase_path(purchase) %>">Go Back</a></p>
+          <% end%>
         </div>
       <% end %>
     </div>
