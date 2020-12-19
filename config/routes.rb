@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   resources :purchases
   resources :cryptos
   devise_for :users
-  root 'home#index'
+  root 'home#about'
+
   get 'home/about'
   get 'home/lookup'
   post 'home/lookup' => 'home/lookup'
