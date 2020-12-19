@@ -1,33 +1,51 @@
-<%= form_with(model: crypto, local: true) do |form| %>
-  <% if crypto.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(crypto.errors.count, "error") %> prohibited this crypto from being saved:</h2>
+<div class='purchase-form'>
+  <div class='purchase-form-container'>
+    <div class=purchase-form-form>
+      
+      <% if crypto.new_record? %>
+        <h2>New Cryptocurrency</h2>
+      <% else %>
+        <h2>Edit Cryptocurrency</h2>
+      <% end %>
 
-      <ul>
-        <% crypto.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
+      <%= form_with(model: crypto, local: true) do |form| %>
+        <% if crypto.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(crypto.errors.count, "error") %> prohibited this crypto from being saved:</h2>
+
+            <ul>
+              <% crypto.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :symbol %>
-    <%= form.text_field :symbol %>
+        <div class="field">
+          <label>Cryptocurrency Symbol</label>
+          <%= form.text_field :symbol, placeholder: 'Eg, BTC, XRP, LTC..' %>
+        </div>
+
+        <div class="field">
+          <label>Amount of Crypto</label>
+          <%= form.text_field :amount_owned, placeholder: 'How much do you own?' %>
+        </div>
+
+        <div class="field">
+          <label>Cost per Crypto</label>
+          <%= form.text_field :cost_per, placeholder: 'What was the average price you paid?' %>
+        </div>
+
+        <div class="actions">
+          <% if crypto.new_record? %>
+            <%= form.submit 'Create Crypto', class: 'purchase-form-btn', id: 'purchase-form-btn' %>
+            <p>Don't wait to create a crypto? <a href="<%= cryptos_path %>">Go Back</a></p>
+          <% else %>
+            <%= form.submit 'Edit Crypto', class: 'purchase-form-btn', id: 'purchase-form-btn' %>
+            <p>Don't wait to edit this Crypto? <a href="<%= crypto_path(crypto) %>">Go Back</a></p>
+          <% end%>
+        </div>
+        </div>
+      <% end %>
   </div>
-
-
-  <div class="field">
-    <%= form.label :cost_per %>
-    <%= form.text_field :cost_per %>
-  </div>
-
-  <div class="field">
-    <%= form.label :amount_owned %>
-    <%= form.text_field :amount_owned %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
