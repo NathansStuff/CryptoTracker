@@ -74,7 +74,7 @@
             <p>Don't wait to create a transaction? <a href="<%= purchases_path %>">Go Back</a></p>
           <% else %>
             <%= form.submit 'Edit Transaction', class: 'purchase-form-btn', id: 'purchase-form-btn' %>
-            <p>Don't wait to edit this transaction? <a href="<%= purchase_path(purchase) %>">Go Back</a></p>
+            <p class='text-center'>Don't wait to edit this transaction? <a href="<%= purchase_path(purchase) %>">Go Back</a></p>
           <% end%>
         </div>
       <% end %>
