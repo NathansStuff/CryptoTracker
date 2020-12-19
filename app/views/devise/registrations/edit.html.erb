@@ -1,46 +1,47 @@
 <div class='purchase-form'>
   <div class='purchase-form-container'>
-  <div class='purchase-form-form'>
-<h2>Edit Account</h2>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class='purchase-form-form'>
+      <h2>Edit Account</h2>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="field">
+          <label>Password   <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %>
+          </label> 
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "Leave blank if you don't want to change it" %>
+
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Repeat your new password' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :current_password %>
+          <%= f.password_field :current_password, autocomplete: "current-password", placeholder: 'Required to submit changes' %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Update My Account", id: 'purchase-form-btn' %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= button_to "Delete My Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn-delete' %></p>
+        <p>Don't wait to edit your account? <a href="<%= :back %>">Go Back</a></p>
+      </div>
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <label>Password   <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %>
-    </label> 
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Leave blank if you don't want to change it" %>
-
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: 'Repeat your new password' %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %>
-    <%= f.password_field :current_password, autocomplete: "current-password", placeholder: 'Required to submit changes' %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update My Account", id: 'purchase-form-btn' %>
-  </div>
-<% end %>
-
-<div class="actions">
-<%= button_to "Delete My Account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn-delete' %></p>
-<p>Don't wait to edit your account? <a href="<%= :back %>">Go Back</a></p>
-</div>
-</div>
 </div>
