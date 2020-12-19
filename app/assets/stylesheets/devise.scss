@@ -44,3 +44,17 @@
     font-size: 18px;
     text-align: center;
 }
+
+.login-remember {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.login-remember input {
+    width: 15px;
+}
+
+.login-remember label {
+    margin-right: 10px;
+    width: auto;
+}

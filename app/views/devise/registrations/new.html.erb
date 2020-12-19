@@ -27,7 +27,8 @@
       <% end %>
 
       <p class='signup-text'>Already have an account? <a href="<%= new_user_session_path %>">Sign In</a></p>
-      <p class='signup-text'>Forgot your password? <a href="<%= :back %>">Reset it</a></p>
+      <p class='signup-text'>Forgot your password? 
+      <a href="<%= new_password_path(resource_name) %>">Reset it</a></p>
     </div>
   </div>
 </div>
