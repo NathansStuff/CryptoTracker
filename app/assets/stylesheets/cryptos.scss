@@ -4,9 +4,11 @@
     padding: 0;
     min-height: 90vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 .crypto-index {
     margin-top: 40px;
     // background-color: var(--c4);
@@ -37,4 +39,69 @@
 .crypto-link:hover {
     color: #fff;
     text-decoration: none;
+}
+
+.crypto-summary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.individual-crypto {
+    background-color: var(--c2);
+    color: #fff;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.up,
+i.fas.fa-arrow-up {
+    color: #00ff00;
+    display: inline;
+    white-space: nowrap;
+}
+
+.down,
+i.fas.fa-arrow-down {
+    color: #ff0000;
+}
+
+.crypto-movement {
+    display: flex;
+    margin-left: 10px;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.crypto-individual-portfolio {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.crypto-line::before {
+    content: ' ';
+    border: 2px solid var(--c5);
+    display: inline-block;
+    position: absolute;
+    top: 165px;
+    width: 90%;
+    right: 5%;
+}
+
+.p-no-gap {
+    margin-bottom: 5px;
+}
+
+.img-title {
+    margin-bottom: 5px;
 }

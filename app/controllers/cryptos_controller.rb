@@ -6,6 +6,8 @@ class CryptosController < ApplicationController
     @portfolio_profit = 0
     @cryptos = Crypto.where(user_id: current_user.id)
 
+    @file = File.join(Rails.root, "app", "assets", "images")
+
     #Connects to API
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
     headers = {

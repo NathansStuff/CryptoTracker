@@ -1,4 +1,79 @@
 <div class='crypto-bg'>
+  
+  <div class='crypto-summary'>
+    <% for crypto in @cryptos %>
+      <div class='individual-crypto'>
+        <div>
+        <%# Image %>
+        <% if File.exist?("#{@file}/color/#{crypto.symbol.downcase}.png") %>
+            <%= image_tag("color/#{crypto.symbol.downcase}.png", :class => 'purchase-img img-title')%>
+        <% end %>
+
+        <% @crypto_coins.each do |crypto_coin| %>
+          <% if crypto.symbol == crypto_coin['symbol'] %>
+            <%# Crypto Name %>
+            <%= crypto_coin['name'] %>
+            </div>
+
+            <div>
+              <p>USD $<%= crypto_coin['quote']['USD']['price'].round(4) %></p>
+            </div>
+
+            <div class='crypto-movement'>
+              <%# 1 Hr Change %>
+              <% if (crypto_coin['quote']['USD']['percent_change_1h']) >= 0 %>
+                <p><span class='up'><i class='fas fa-arrow-up' ></i>
+                <%= (crypto_coin['quote']['USD']['percent_change_1h']).round(2) %>%</span> 1H</p>
+              <% else%>
+                <p><span class='down'><i class='fas fa-arrow-down' ></i>
+                <%= (crypto_coin['quote']['USD']['percent_change_1h']).round(2) %>%</span> 1H</p>
+              <% end %>
+              
+              <%# 24 Hr Change %>
+              <% if (crypto_coin['quote']['USD']['percent_change_24h']) >= 0 %>
+                <p><span class='up'><i class='fas fa-arrow-up' ></i>
+                <%= (crypto_coin['quote']['USD']['percent_change_24h']).round(2) %>%</span> 24H</p>
+              <% else%>
+                <p><span class='down'><i class='fas fa-arrow-down' ></i>
+                <%= (crypto_coin['quote']['USD']['percent_change_24h']).round(2) %>%</span> 24H</p>
+              <% end %>
+
+              <%# 7 Day Change %>
+              <% if (crypto_coin['quote']['USD']['percent_change_7d']) >= 0 %>
+                <p><span class='up'><i class='fas fa-arrow-up' ></i>
+                <%= (crypto_coin['quote']['USD']['percent_change_7d']).round(2) %>%</span> 7Day</p>
+              <% else%>
+                <p><span class='down'><i class='fas fa-arrow-down' ></i>
+                <%= (crypto_coin['quote']['USD']['percent_change_7d']).round(2) %>%</span> 7Day</p>
+              <% end %>
+            </div>
+
+            <div class='crypto-individual-portfolio'>
+              <div>
+                <p class='p-no-gap'>Amount Owned</p>
+                <%= crypto.amount_owned %>
+              </div>
+              <div class='crypto-line'></div>
+              <div>
+                <p class='p-no-gap'>Value USD</p>
+                $ <%= crypto.amount_owned * crypto_coin['quote']['USD']['price'].round(2) %>
+              </div>
+            </div>
+
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <div class='crypto-index'>
     <table>
       <thead>
@@ -13,7 +88,6 @@
       <tbody>
         <% @cryptos.each do |crypto| %>
           <tr>
-            
             <% @crypto_coins.each do |crypto_coin| %>
               <% if crypto.symbol == crypto_coin['symbol'] %>
                 <%# Crypto Name %>
