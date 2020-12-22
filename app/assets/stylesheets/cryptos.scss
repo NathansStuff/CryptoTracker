@@ -1,6 +1,40 @@
+.crypto-bg {
+    background-color: var(--c3);
+    margin: 0;
+    padding: 0;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .crypto-index {
-    background-color: var(--c4);
+    margin-top: 40px;
+    // background-color: var(--c4);
     border-radius: 10px;
     max-width: 90%;
     overflow-x: scroll;
+}
+
+.crypto-index tr:nth-child(odd) {
+    background-color: var(--c4);
+    color: #fff;
+}
+
+.crypto-index tr:nth-child(even) {
+    background-color: var(--c2);
+    color: #fff;
+}
+
+#crypto-index-header {
+    background-color: var(--c5);
+    color: #000;
+}
+
+.crypto-link {
+    color: #fff;
+}
+
+.crypto-link:hover {
+    color: #fff;
+    text-decoration: none;
 }

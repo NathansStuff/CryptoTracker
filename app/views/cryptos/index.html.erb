@@ -1,18 +1,12 @@
-<div class='purchase-form'>
+<div class='crypto-bg'>
   <div class='crypto-index'>
     <table>
       <thead>
-        <tr>
+        <tr id='crypto-index-header'>
           <th>Name</th>
-          <th>Current Price</th>
-          <th>1 HR %</th>
-          <th>24 HR %</th>
-          <th>7 Day %</th>
+          <th>24HR</th>
           <th>Current Value</th>
-          <th>Total Paid</th>
-          <th>Profit/Loss</th>
-          <th>Cost Paid per</th>
-          <th>Amount owned</th>
+          <th>Total</th>
         </tr>
       </thead>
 
@@ -23,38 +17,28 @@
             <% @crypto_coins.each do |crypto_coin| %>
               <% if crypto.symbol == crypto_coin['symbol'] %>
                 <%# Crypto Name %>
-                <td><%= link_to crypto_coin['name'], crypto %></td>
-                <%# Current Value %>
-                <td><%= number_to_currency(crypto_coin['quote']['USD']['price']) %></td>
-                <%# 1 Hr Change %>
-                <td><%= (crypto_coin['quote']['USD']['percent_change_1h']).round %>%</td>
+                <td><%= link_to crypto_coin['name'], crypto, class: 'crypto-link' %></td>
                 <%# 24 Hr Change %>
                 <td><%= (crypto_coin['quote']['USD']['percent_change_24h']).round  %>%</td>
-                <%# 7 Day Change %>
-                <td><%= (crypto_coin['quote']['USD']['percent_change_7d']).round  %>%</td>
                 <%# Total Value %>
                 <td><%= number_to_currency(crypto_coin['quote']['USD']['price'].to_d * crypto.amount_owned) %>
-                <%# Total Paid %>
-                <td><%= number_to_currency(crypto.cost_per * crypto.amount_owned) %></td>
-                <%# Profit/Loss %>
-                <td><%= number_to_currency((crypto_coin['quote']['USD']['price'].to_d - crypto.cost_per)*crypto.amount_owned) %></td>
-                <%# Running Profit Loss %>
-                <% @portfolio_profit += (crypto_coin['quote']['USD']['price'].to_d - crypto.cost_per)*crypto.amount_owned %>
               <% end %>
             <% end%>
-            
-            <td><%= number_to_currency(crypto.cost_per) %></td>
+            </td>
             <td><%= crypto.amount_owned %></td>
 
 
           </tr>
         <% end %>
+        <tr id='crypto-index-header'>
       </tbody>
+      
     </table>
 
     <br>
 
 
+    
     <strong>Portfolio Profit/Loss: <%= number_to_currency(@portfolio_profit) %> </strong>
     <br>
     <br>
