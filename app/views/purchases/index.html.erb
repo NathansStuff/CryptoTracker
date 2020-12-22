@@ -20,6 +20,8 @@
 
           <% if File.exist?("#{@file}/color/#{purchase.symbol.downcase}.png") %>
             <%= image_tag("color/#{purchase.symbol.downcase}.png", :class => 'purchase-img')%>
+          <% else %>
+          <%= purchase.symbol %>
           <% end %>
           </div>
 
